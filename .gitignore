@@ -1,0 +1,46 @@
+# ── Python ──────────────────────────────────────────────────────────────
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+*.pyc
+
+# ── Public datasets: never committed ────────────────────────────────────
+# These are large (about 1.9 GB together) and are redistributable only under
+# their own licences. tools/fetch_*.py and the README say where each comes from.
+data/paderborn/
+data/hydraulic/
+data/cwru/
+data/mfpt/
+data/ottawa/
+data/kaist/
+data/ims/
+data/xjtu/
+data/pu_*/
+actuator_dataset/
+data/*.mat
+data/*.npy
+data/*.csv
+data/*.7z
+data/*.rar
+data/*.zip
+data/**/_npy/
+
+# ── Run outputs ─────────────────────────────────────────────────────────
+runs/
+*.pdf
+*.log
+!RUNLOG_*.md
+
+# ── Kept deliberately ───────────────────────────────────────────────────
+# data/semantic/ IS committed: synthetic asset card + mock work orders, a few
+# kB, and the semantic-gate tests need it to run on a fresh clone.
+!data/semantic/
+!data/semantic/**
+
+# ── Internal pursuit documents: never committed ─────────────────────────
+# These stay on disk in the pursuit folder. They are working documents for
+# the team, not part of the published codebase.
+TRICHA_COVER_NOTE.md
+HANDOVER.md
+KAIST_Authors_EMAIL.md

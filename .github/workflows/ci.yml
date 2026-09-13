@@ -1,0 +1,36 @@
+# Two gates, the same two a contributor runs locally. Neither needs a dataset:
+# the suite builds every file layout it tests from scratch, so a fresh clone is
+# fully testable and a loader regression is caught on the machine that made it
+# rather than on the one machine that happens to hold 8 GB of public data.
+name: ci
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.9 is the floor stated in pyproject; 3.12 is what the dev machines
+        # run. Both are tested because the loaders use `str | Path` annotations
+        # that only work on 3.9 via `from __future__ import annotations`.
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Lint
+        run: flake8 src/cbmx tools tests scripts
+      - name: Unused imports and dead f-prefixes
+        run: python3 scripts/tidy.py --check
+      - name: Tests
+        run: PYTHONPATH=src pytest tests/ -q
+      - name: Runs with no dataset at all
+        run: PYTHONPATH=src python3 tools/eval_semantic.py

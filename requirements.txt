@@ -1,0 +1,7 @@
+# Pinned to what the 5 September 2026 evidence run used (Cowork Linux VM, Python 3.10).
+# The study needs nothing else: no GPU, no network, no model weights.
+numpy==2.2.6
+scipy==1.15.3
+pandas==2.3.3
+PyYAML==6.0.3
+pytest==9.1.1

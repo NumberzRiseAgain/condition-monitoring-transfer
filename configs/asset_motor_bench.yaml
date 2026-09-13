@@ -1,0 +1,56 @@
+# ---------------------------------------------------------------------------
+# ASSET CARD — the bench motor that stands in for AAG rotating machinery.
+#
+# Everything the system claims is derived from this file. There are no fault
+# frequencies written here: they come out of the geometry below. If a number in
+# a report is wrong, a dimension here is wrong — which is a fixable, checkable
+# kind of wrong, and the one a Navy engineer can audit.
+#
+# When Matthew supplies the real AAG breakdown, only this file changes.
+# ---------------------------------------------------------------------------
+asset: bench_motor_01
+name: 2 hp induction motor test stand (surrogate for AAG HPU pump motor)
+
+lrus:
+  - id: motor
+    name: Drive motor
+    part_number: ""
+    notes: Surrogate. On AAG the analogue is the HPU pump motor.
+  - id: de_bearing
+    name: Drive-end bearing
+    part_number: "6205-2RS-JEM"
+    parent: motor
+  - id: fe_bearing
+    name: Fan-end bearing
+    part_number: "6203-2RS-JEM"
+    parent: motor
+
+sensors:
+  - id: acc_de
+    kind: accelerometer
+    location: drive-end housing, 12 o'clock
+    fs: 12000
+    watches: [de_bearing]
+    # Frozen at commissioning. Absent until `cbmx commission` has run — the
+    # monitor refuses to start without it, because choosing a band at run time
+    # biases the evidence toward finding a fault.
+    band_lo_hz: null
+    band_hi_hz: null
+
+bearings:
+  - lru: de_bearing
+    designation: SKF 6205-2RS JEM
+    n_rolling: 9
+    ball_diameter: 0.3126
+    pitch_diameter: 1.537
+    contact_angle_deg: 0.0
+    shaft_ratio: 1.0
+    source: CWRU bearing data centre, drive end (inches)
+  - lru: fe_bearing
+    designation: SKF 6203-2RS JEM
+    n_rolling: 8
+    ball_diameter: 0.2656
+    pitch_diameter: 1.122
+    contact_angle_deg: 0.0
+    shaft_ratio: 1.0
+    source: CWRU bearing data centre, fan end (inches)

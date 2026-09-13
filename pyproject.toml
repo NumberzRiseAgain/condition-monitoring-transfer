@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cbmx"
+version = "0.1.0"
+description = "Explainable condition-based maintenance at the edge: physics says where to look, the machine says what is normal, sequential evidence says when to speak."
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.24", "pyyaml>=6.0", "scipy>=1.10", "pandas>=2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "flake8>=6", "pyflakes>=3"]
+
+
+[project.scripts]
+cbmx = "cbmx.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
