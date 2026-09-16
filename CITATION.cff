@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "cbmx: cross-rig condition monitoring"
+message: "If you use this software, please cite it."
+type: software
+authors:
+  - family-names: Venkat
+    given-names: Raghu
+    affiliation: "Numberz.ai Inc."
+repository-code: "https://github.com/NumberzRiseAgain/condition-monitoring-transfer"
+license: MIT
